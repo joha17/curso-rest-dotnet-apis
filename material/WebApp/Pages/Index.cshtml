@@ -11,12 +11,29 @@
 
         @*@ViewData["Models"].ToString();*@
 
-        @if (ViewData["Products"] != null)
-        {
-            @foreach (var item in ViewData["Products"] as IEnumerable<Product>)
-            {
-                @item.Name
-            }
-        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (ViewData["Products"] != null)
+                {
+                    @foreach (var item in ViewData["Products"] as IEnumerable<Product>)
+                    {
+                        <tr>
+                            <th scope="row">@item.id</th>
+                            <td>@item.name</td>
+                        </tr>
+                    }
+                }
+
+
+            </tbody>
+        </table>
+        
 
     </div>
