@@ -38,7 +38,7 @@ namespace WebApp.Pages
                     
                     ViewData["Models"] = models;
 
-                    return models;
+                    return ViewResult();
                 }
             }
             catch (Exception)
