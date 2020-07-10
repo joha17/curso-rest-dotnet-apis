@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -24,16 +24,15 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<object> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            int i = 0;
+            var result = Summaries.Select(model => new { 
+                Name = model,
+                Id= i++
+             });
+
+            return result;
         }
     }
 }
