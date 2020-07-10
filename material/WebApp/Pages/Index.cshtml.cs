@@ -20,6 +20,8 @@ namespace WebApp.Pages
             _logger = logger;
         }
 
+        [ViewData]
+        public Product[] Products { get; set; }
         public async Task<IActionResult> OnGet()
         {
             try
@@ -35,10 +37,9 @@ namespace WebApp.Pages
                     _logger.LogInformation("Response: {0}", result);
 
                     Product[] models = JsonSerializer.Deserialize<Product[]>(result);
-                    
-                    ViewData["Models"] = models;
 
-                    return ViewResult();
+                    Products = models;
+                    return Page();
                 }
             }
             catch (Exception)
