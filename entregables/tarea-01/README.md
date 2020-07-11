@@ -1,11 +1,13 @@
  # Tarea # 01
 
 1. En que consiste CORS?
-R/ CORS (Cross Origin Resource Sharing, o bien en español Intercambio de Recursos de Origen Cruzado) es un mecanismo en el que permite solicitar recursos restringidos desde una página web de un dominio a otro recurso web de otro dominio. De esta manera, CORS define una manera en la que el navegador y el servidor puedan interactuar para determinar si la petición de origen cruzado es segura.
+
+CORS (Cross Origin Resource Sharing, o bien en español Intercambio de Recursos de Origen Cruzado) es un mecanismo en el que permite solicitar recursos restringidos desde una página web de un dominio a otro recurso web de otro dominio. De esta manera, CORS define una manera en la que el navegador y el servidor puedan interactuar para determinar si la petición de origen cruzado es segura.
 
 2. Incluir un ejemplo de solucion en C#, JavaScript, Python, Go o algun otro lenguaje
+
 3. Que es Docker y en que consiste el concepto de Imagen y Contenedor?
-R/ 
+
 ### Que es Docker?
 Docker es un proyecto de código abierto para automatizar la implementación de aplicaciones como contenedores portátiles y autosuficientes que se pueden ejecutar en la nube o localmente. 
 Los contenedores de Docker se pueden ejecutar en cualquier lugar, localmente en el centro de recursos de cliente, en un proveedor de servicios externo o en la nube, en Azure. Los contenedores de imágenes de Docker también se pueden ejecutar de forma nativa en Linux y Windows. Sin embargo, las imágenes de Windows solo pueden ejecutarse en hosts de Windows y las imágenes de Linux pueden ejecutarse en hosts de Linux y hosts de Windows (con una máquina virtual Linux de Hyper-V, hasta el momento), donde host significa un servidor o una máquina virtual.
