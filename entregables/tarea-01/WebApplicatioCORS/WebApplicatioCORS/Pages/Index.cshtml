@@ -1,0 +1,39 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+    <div class="text-center">
+        <h3 class="display-4">Peliculas</h3>
+
+        <p>Esta llamada se realiza desde el metodo get de index.cshtml</p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">FechaEstreno</th>
+                    <th scope="col">Url</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (ViewData["Moviees"] != null)
+                {
+                    @foreach (var item in ViewData["Moviees"] as IEnumerable<WebApplicationCORS.Movies>)
+                    {
+                        <tr>
+                            <th scope="row">@item.IdPelicula</th>
+                            <td>@item.Titulo</td>
+                            <td>@item.Descripcion</td>
+                            <td>@item.FechaEstreno</td>
+                            <td> <img src='@item.Url' style='width: 75px; height:150px' /></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>

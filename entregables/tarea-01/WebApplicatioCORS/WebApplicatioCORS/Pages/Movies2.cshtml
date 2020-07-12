@@ -1,0 +1,48 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<div class="text-center">
+    <h3 class="display-4">Peliculas</h3>
+
+    <p>Esta llamada se realiza desde un json con jquery, el cual daba error por la resrticcion del CORS</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Sinopsis</th>
+                <th>Fecha de estreno</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+        <tbody id="informacion">
+        </tbody>
+    </table>
+    </div>
+
+    @section scripts {
+        <script>
+            $(document).ready(function () {
+                cargarPeliculas();
+            });
+
+            function cargarPeliculas() {
+                var url = "https://localhost:44326/movies/";
+                $.getJSON(url, function (data) {
+                    var html = "";
+                    $.each(data, function (key, movie) {
+                        html += "<tr>";
+                        html += "<td>" + movie.idPelicula + "</td>";
+                        html += "<td>" + movie.titulo + "</td>";
+                        html += "<td>" + movie.descripcion + "</td>";
+                        html += "<td><img src='" + movie.url + "' style='width: 75px; height:150px' /></td>";
+                        html += "</tr>";
+                    });
+                    $("#informacion").append(html);
+                });
+            }
+        </script>
+    }
