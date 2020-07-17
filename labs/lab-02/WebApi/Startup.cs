@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace WebApi
 {
@@ -25,8 +26,6 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-<<<<<<< Updated upstream
-=======
             services.AddCors(options => options.AddDefaultPolicy(builder => {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
@@ -38,7 +37,6 @@ namespace WebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
->>>>>>> Stashed changes
             services.AddControllers();
         }
 
@@ -50,8 +48,6 @@ namespace WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-<<<<<<< Updated upstream
-=======
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
@@ -62,7 +58,6 @@ namespace WebApi
 
             app.UseCors();
 
->>>>>>> Stashed changes
             app.UseHttpsRedirection();
 
             app.UseRouting();

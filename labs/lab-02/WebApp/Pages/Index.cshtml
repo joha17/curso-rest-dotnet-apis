@@ -1,0 +1,36 @@
+﻿@page
+@model IndexModel
+@{
+    // Server-side rendering
+    ViewData["Title"] = "Home page";
+}
+
+    <div class="text-center">
+        <h3 class="display-4">Products</h3>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (ViewData["Products"] != null)
+                {
+                    @foreach (var item in ViewData["Products"] as IEnumerable<Product>)
+                    {
+                        <tr>
+                            <th scope="row">@item.id</th>
+                            <td>@item.name</td>
+                        </tr>
+                    }
+                }
+
+
+            </tbody>
+        </table>
+        
+
+    </div>
