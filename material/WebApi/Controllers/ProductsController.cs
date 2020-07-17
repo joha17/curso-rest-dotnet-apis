@@ -11,9 +11,9 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private static readonly string[] Products = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Jeans", "Pants", "Boxers", "Socks", "Shoes"
         };
 
         private readonly ILogger<ProductsController> _logger;
@@ -24,15 +24,32 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<object> Get()
+        public ActionResult<IEnumerable<object>> Get()
         {
             int i = 0;
-            var result = Summaries.Select(model => new { 
+            var result = Products.Select(model => new {
                 Name = model,
-                Id= i++
-             });
+                Id = i++
+            });
 
-            return result;
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public object GetById(int id)
+        {
+            int i = 0;
+            var result = Products.Select(model => new {
+                Name = model,
+                Id = i++
+            }).ToList();
+
+            if (result.ElementAtOrDefault(id) == null)
+            {
+                return NotFound(new { Message = "No se encuentra el producto"});
+            }
+
+            return result[id];
         }
     }
 }
