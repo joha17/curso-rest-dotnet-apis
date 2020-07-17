@@ -20,32 +20,28 @@ namespace WebApp.Pages
             _logger = logger;
         }
 
-        [ViewData]
-        public Product[] Products { get; set; }
+
         public async Task<IActionResult> OnGet()
         {
-            try
+            using (var client = new HttpClient ())
             {
-                using (var client = new HttpClient ())
-                {
-                    client.BaseAddress = new Uri("https://localhost:44331/api/");
-                    
-                    //HttpStatusCode a = HttpStatusCode.OK;
-                    
-                    var result = await client.GetStringAsync("products");
+                client.BaseAddress = new Uri("http://localhost:5000/api/" /*Web API*/ );
 
-                    _logger.LogInformation("Response: {0}", result);
+                // Request
+                var result = await client.GetStringAsync("products");
 
-                    Product[] models = JsonSerializer.Deserialize<Product[]>(result);
+                _logger.LogInformation("Response: {0}", result);
 
-                    Products = models;
-                    return Page();
-                }
-            }
-            catch (Exception)
-            {
+                // Deserializacion (JSON -> Object)
 
-                throw;
+                Product[] models = JsonSerializer.Deserialize<Product[]>(result);
+
+                ViewData["Models"] = models;
+
+                // 1) Cambiar Id=>id en Producto
+                // 2) Mostrar los productos en el HTML/Razor
+
+                return Page();
             }
         }
     }

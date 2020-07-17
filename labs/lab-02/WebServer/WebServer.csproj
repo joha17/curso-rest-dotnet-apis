@@ -4,9 +4,4 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <!-- packages.config -->
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
-  </ItemGroup>
-
 </Project>
