@@ -47,3 +47,5 @@ http://rogerdudler.github.io/git-guide/
 8) Ejecutar `git commit -m "Primer commit"`
 9) Ejecutar `git remote add miNombre https://github.com/fulanito123/mi-repo.git`
 10) Ejecutar `git push origin master -f`
+
+[![Try in PWD](https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/stvansolano/curso-rest-dotnet-apis/wip/playground.yml)
