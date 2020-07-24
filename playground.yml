@@ -30,3 +30,8 @@ services:
       ACCEPT_EULA: "Y"
 
 
+  play-with-docker:
+    container_name: play-with-docker
+    image: docker/getting-started:pwd
+    ports:
+      - 8080:80
