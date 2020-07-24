@@ -11,27 +11,26 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private static readonly string[] Products = new[]
-        {
-            "Jeans", "T-shirt", "Pants"
-        };
+        
 
         private readonly ILogger<ProductsController> _logger;
-            
-        public ProductsController(ILogger<ProductsController> logger)
+        private readonly ApplicationSettings _settings;
+        private readonly ProductRepository _repository;
+
+        public ProductsController(ILogger<ProductsController> logger, ApplicationSettings settings, ProductRepository repository)
         {
             _logger = logger;
+            _settings = settings;
+            _repository = repository;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<object>> Get()
         {
-            int i = 0;
+            
+            var result = _repository.Get();
 
-            var result = Products.Select(model => new { 
-                Name = model,
-                Id = i++
-            });
+            _logger.LogInformation("Variable {0}", _settings.Variable);
 
             return Ok(result);
         }
@@ -39,18 +38,20 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public object GetById(int id) 
         {
-            int i = 0;
+            var result = _repository.GetById(id);
 
-            var result = Products.Select(model => new {
-                Name = model,
-                Id = i++
-            }).ToList();
-
-            if (result.ElementAtOrDefault(id) == null)
+            if (result == null)
             {
                 return NotFound(new {Message = "No se encuentra el elemento" });
             }   
-            return result[id];
+            return result;
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] string name)
+        {
+            _repository.Save(name);
+            return Ok();
         }
     }
 }

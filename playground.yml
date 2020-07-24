@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  
+  webapi:
+    container_name: webapi
+    image: stvansolano/aspnet-webapi-net3
+    ports:
+      - 8081:80
+    depends_on: 
+    - db-sql-server
+  
+  webapp:
+    image: stvansolano/aspnet-webapp-net3
+    container_name: webapp
+    environment: 
+      - ServerUrl=http://webapi:80
+    ports:
+      - 80:80
+    depends_on: 
+      - webapi
+
+  db-sql-server:
+    container_name: db-sql-server
+    image: stvansolano/adventure-works-sql-server:latest
+    ports:
+      - 1433:1433
+    environment:
+      SA_PASSWORD: "Password.123"
+      ACCEPT_EULA: "Y"
+
+
