@@ -1,11 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using WebApi.Infrastructure.Data.Models;
 
 namespace WebApi.Controllers
 {
     public class ProductRepository
     {
+        public AdventureworksContext UnitOfWork {get; set;}
+        public ProductRepository(Infrastructure.Data.Models.AdventureworksContext dbContext)
+        {
+            UnitOfWork = dbContext;
+        }
         private readonly List<string> Products = new List<string>
         {
             "Jeans", "T-shirt", "Pants"

@@ -23,9 +23,12 @@ namespace WebApp.Pages
 
         public async Task<IActionResult> OnGet()
         {
+            var webApi = System.Environment.GetEnvironmentVariable("ServerUrl");
+            _logger.LogInformation("Web Api: {0}", webApi);
+
             using (var client = new HttpClient ())
             {
-                client.BaseAddress = new Uri("http://localhost:5000/api/" /*Web API*/ );
+                client.BaseAddress = new Uri(webApi /*Web API*/ );
 
                 // Request
                 var result = await client.GetStringAsync("products");

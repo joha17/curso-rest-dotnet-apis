@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using WebApi.Controllers;
+using WebApi.Infrastructure.Data.Models;
 
 namespace WebApi
 {
@@ -32,14 +34,23 @@ namespace WebApi
             //InCode
             //AppSettings
             //Environment Variable
+            var applicationSettings = new ApplicationSettings();
             var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<ApplicationSettings>(appSettingsSection);
+            appSettingsSection.Bind(applicationSettings);
+            
+            var var1 = Environment.GetEnvironmentVariable("AppSettings__Variable");
+            if (!string.IsNullOrEmpty(var1)) 
+            {
+                applicationSettings.Variable = var1;
+            }
 
-            services.AddSingleton<ApplicationSettings>(new ApplicationSettings { 
-                Variable = System.Environment.GetEnvironmentVariable("Variable")  ?? "123"}
-            );
+            services.AddSingleton(applicationSettings);
+            
+            services.AddDbContext<AdventureworksContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")));
 
-            services.AddSingleton<ProductRepository>();
+
+            services.AddScoped<ProductRepository>();
 
             services.AddCors(options => options.AddDefaultPolicy(builder => {
                 

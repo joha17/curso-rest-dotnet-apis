@@ -12,6 +12,11 @@
     @{
         var data = ViewData["Models"] as Product[]  ?? new Product[0];
 
-        @data.Length;
+         foreach (var item in data)
+        {
+            <ul>
+                <li>@item.name</li>
+            </ul>
+        }
     }
 </div>
